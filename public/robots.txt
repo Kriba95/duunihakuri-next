@@ -1,0 +1,6 @@
+Sitemap: https://duunihakuri.fi/sitemap.xml
+
+User-agent: *
+Allow: /*
+
+Disallow: /api/*

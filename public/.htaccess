@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+ErrorDocument 404 /404.html
+</IfModule>
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^duunihakuri\.fi$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.duunihakuri\.fi$
+RewriteRule ^/?$ "https\:\/\/duunihakuri\.fi\/" [R=301,L]
+

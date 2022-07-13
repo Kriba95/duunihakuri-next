@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import '@material-tailwind/react/tailwind.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html,
 body {
   padding: 0;
@@ -13,4 +19,31 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e5e7eb;; 
+  border-radius: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

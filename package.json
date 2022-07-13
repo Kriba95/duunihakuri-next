@@ -1,20 +1,38 @@
 {
   "name": "duunihakuri-next",
-  "version": "0.1.0",
+  "version": "0.3.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "@headlessui/react": "^1.5.0",
+    "@material-tailwind/react": "0.3.4",
+    "ansi-regex": "^6.0.1",
+    "axios": "^0.26.1",
+    "cookie": "^0.4.2",
+    "countapi-js": "^1.0.2",
+    "globby": "^11.0.1",
+    "next": "^12.1.4",
+    "react": "^18.0.0",
+    "react-cookie": "^4.1.1",
+    "react-dom": "^18.0.0",
+    "react-google-login": "^5.2.2",
+    "react-gtm-module": "^2.0.11",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-scroll": "^1.8.6",
+    "react-scrollable-anchor": "^0.6.1"
   },
   "devDependencies": {
+    "@iconify/react": "^3.2.0",
+    "autoprefixer": "^10.4.4",
     "eslint": "8.11.0",
-    "eslint-config-next": "12.1.0"
+    "eslint-config-next": "12.1.0",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.23"
   }
 }
