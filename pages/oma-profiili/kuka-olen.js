@@ -15,11 +15,11 @@ function JataIlmoitus() {
   const router = useRouter();
 
 
-  useEffect(() => { 
-    if (isAuth === false) {
-      router.push("/login");
-    }
-  }, [isAuth, router]);
+  // useEffect(() => { 
+  //   if (isAuth === false) {
+  //     router.push("/login");
+  //   }
+  // }, [isAuth, router]);
 
   return (
     <div className="div">

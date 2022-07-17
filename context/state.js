@@ -17,10 +17,9 @@ const Axios = axios.create({
 
 export default class ContextProvider extends Component {
   constructor(props) {
-      super(props);
-      // Don't call this.setState() here!
-
-    }
+    super(props);
+    // Don't call this.setState() here!
+  }
 
   // Root State
   state = {
@@ -44,16 +43,16 @@ export default class ContextProvider extends Component {
   };
 
   ///////////////////////////////////////////////////
-  counter = async (props) => {
-    Axios.get("https://api.countapi.xyz/hit/duunihakuri.fi/visits").then(
-      (response) => {
-        // console.log(response.data.value);
-        this.setState({
-          tyopaikkaData: response.data.value,
-        });
-      }
-    );
-  };
+  // counter = async (props) => {
+  //   Axios.get("https://api.countapi.xyz/hit/duunihakuri.fi/visits").then(
+  //     (response) => {
+  //       // console.log(response.data.value);
+  //       this.setState({
+  //         tyopaikkaData: response.data.value,
+  //       });
+  //     }
+  //   );
+  // };
 
   TyoData = async (props) => {
     var postData = {
@@ -179,9 +178,33 @@ export default class ContextProvider extends Component {
       ShowloginButton: true,
       ShowlogoutButton: false,
     });
-    //console.log(this.state)
-    // setShowloginButton(true);
-    // setShowlogoutButton(false);
+  };
+
+  handleSubmitS = async (data) => {
+    //console.log("Login Failed:", res);
+    console.log(data);
+
+    if (data.save === 1) {
+
+      let datas = {data: data.data, save: 1}
+      console.log("state Save ilmoitus");
+      Axios.post("/api/post.php", { datas }, { withCredentials: true }).then(
+        (response) => {
+          console.log(response);
+        }
+      );
+
+    } else {
+      this.setState({
+        ilmoitus: data,
+      });
+
+      Axios.post("/api/post.php", { data }, { withCredentials: true }).then(
+        (response) => {
+          console.log(response);
+        }
+      );
+    }
   };
 
   ////////////////////////////////////////////////////
@@ -199,6 +222,7 @@ export default class ContextProvider extends Component {
       fetchRandomUsers: this.fetchRandomUsers,
       fetchNextUsers: this.fetchNextUsers,
       handleSubmit: this.handleSubmit,
+      handleSubmitS: this.handleSubmitS,
     };
     return (
       <Context.Provider value={contextValue}>

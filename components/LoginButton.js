@@ -7,7 +7,7 @@ export const LoginButton = () => {
   const [isMenuLogOpen, setIsMenuLogOpen] = useState(false);
 
   const { onSignout, rootLoginState } = useContext(LoginContext);
-  console.log(rootLoginState);
+  console.log("LoginButton");
 
   const { theUser, hasValue } = rootLoginState;
 
@@ -20,15 +20,8 @@ export const LoginButton = () => {
   // theUser.hasValue
   //
 
-  function expand() {
-    setIsMenuLogOpen(true);
-  }
-
-  function close() {
-    setIsMenuLogOpen(false);
-  }
   return (
-    <div className="relative inline-block">
+    <div className="relative inline-block  transition-all duration-300">
       {/* button     */}
 
       {rootLoginState.isAuth === true ? (
@@ -111,6 +104,8 @@ export const LoginButton = () => {
           <a
             onClick={() => {
               router.push("/oma-profiili");
+              setIsMenuLogOpen(!isMenuLogOpen);
+
             }}
             className="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
           >

@@ -9,10 +9,14 @@ import Head from "next/head";
 import { LoginContext } from "../../context/loginstate";
 
 function Index(props) {
-  const { rootLoginState } = useContext(LoginContext);
+  const { rootLoginState, getUserData } = useContext(LoginContext);
 
+  //   if (rootLoginState.theUser.nimi === "") {
+  //   console.log("once.getUserData");
+
+  //   getUserData();
+  // }
   const { hasValue } = rootLoginState;
-  console.log(hasValue)
   console.log("WTF  ")
 
 
@@ -26,7 +30,7 @@ function Index(props) {
       </Head>
 
      
-        <div className="md:ml-64">
+        <div className="">
           <Sidebar />
 
           <div className="bg-gray-900  pt-56 pb-28 px-3 md:px-8 h-auto">

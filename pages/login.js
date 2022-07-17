@@ -66,13 +66,13 @@ function Login() {
     //console.log(rootLoginState)
   };
 
-  const { isLoggedIn } = useContext(LoginContext);
+  // const { isLoggedIn } = useContext(LoginContext);
 
-  const submitHandlers = async (event) => {
-    //console.log("adsa");
-    event.preventDefault();
-    await isLoggedIn(2);
-  };
+  // const submitHandlers = async (event) => {
+  //   //console.log("adsa");
+  //   event.preventDefault();
+  //   await isLoggedIn(2);
+  // };
 
   const handleChange = ({ target }) => {
     //console.log("adsa");

@@ -16,7 +16,7 @@ export default function Teams() {
     return (
       <>
 
-        <div className="md:ml-64">
+        <div className="">
           <Sidebar />
 
           <div className="bg-gray-900  pt-56 pb-28 px-3 md:px-8 h-auto">
