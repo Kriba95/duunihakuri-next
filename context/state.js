@@ -1,5 +1,8 @@
 import React, { createContext, Component } from "react";
 import axios from "axios";
+import toast, { useToaster } from "react-hot-toast";
+import Router, { withRouter } from "next/router";
+
 
 export const Context = createContext();
 
@@ -172,6 +175,8 @@ export default class ContextProvider extends Component {
   };
 
   onSignoutSuccess = async (props) => {
+    toast("You have been logged out successfully")
+
     alert("You have been logged out successfully");
     console.clear();
     this.setState({
@@ -190,7 +195,19 @@ export default class ContextProvider extends Component {
       console.log("state Save ilmoitus");
       Axios.post("/api/post.php", { datas }, { withCredentials: true }).then(
         (response) => {
-          console.log(response);
+          let jotain = response.data.data;
+
+          if (response.data = 88) {
+
+
+            toast("Ilmoitus Talennettu")
+
+            console.log("save success | Api verified ")
+            console.log(jotain);
+
+                Router.push("/dhaccounts/ilmoitus-" + jotain + "?query=-tralalebus-");
+
+          }
         }
       );
 

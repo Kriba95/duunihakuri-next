@@ -1,20 +1,24 @@
 import React, { useEffect, useContext } from "react";
 
-import Card from "@material-tailwind/react/Card";
-import CardBody from "@material-tailwind/react/CardBody";
-import Button from "@material-tailwind/react/Button";
-import Input from "@material-tailwind/react/Input";
+import Card from "@material-tailwind/react/components/Card";
+import CardBody from "@material-tailwind/react/components/Card/CardBody";
+
+import Button from "@material-tailwind/react/components/Button";
+import Input from "@material-tailwind/react/components/Input";
 import { LoginContext } from "../context/loginstate";
 import { useRouter } from "next/router";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
+import Link from "next/link";
+import HotToastNotifications from "./HotToastNotification";
 
-export default function ilmoitukset() {
+export default function Ilmoitukset() {
   const { getIlmoitukset, rootLoginState } = useContext(LoginContext);
   
-  // if job has image 
-  const [jobImage, setjobImage] = useState(false)
-  
+
+  // if job has image
+  const [jobImage, setjobImage] = useState(false);
+
   // omat Ilmoitukset mini image
   let imageSource = "#";
 
@@ -22,9 +26,16 @@ export default function ilmoitukset() {
     getIlmoitukset();
   }, []);
 
-  const { ilmoitukset } = rootLoginState;
-  const router = useRouter();
+  let { ilmoitukset } = rootLoginState;
+  if ( ilmoitukset === false){
+    console.log("adasdasdasdasdasdad")
 
+    ilmoitukset = [];
+  }
+  console.log("2132313123123")
+
+  console.log(ilmoitukset)
+  const router = useRouter();
 
   return (
     <Card>
@@ -33,53 +44,90 @@ export default function ilmoitukset() {
           <h2 className="font-sans text-2xl font-bold tracking-tight text-white sm:text-2xl sm:leading-none">
             Omat Ilmoitukset
           </h2>
+          <HotToastNotifications />
         </div>
       </div>
       <CardBody>
-        <br />
-        <br />
+        <div>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+            rel="stylesheet"
+          />
+          <style
+            dangerouslySetInnerHTML={{
+              __html:
+                '\n    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");\n    body{\n      font-family: "Roboto", sans-serif;\n      background-color: #E2E9EE;\n    }\n    .break-inside {\n      -moz-column-break-inside: avoid;\n      break-inside: avoid;\n    }\n',
+            }}
+          />
+          <div className="box-border mx-4 max-w-full sm:columns-2 md:columns-2 lg:columns-4 xl:columns-5 gap-4">
+            {ilmoitukset ? (
+              <>
+                {ilmoitukset.map((ilmoitukset) => {
+                  console.log(ilmoitukset);
+                  return (
+                    <div
+                      className="cursor-pointer"
 
-        {/* {imoitukset == (ilmoitukset.map((item, i) => (<>lol</>))) : null} */}
 
-        {/* 
-          {ilmoitukset.map(name => <h2>{name}</h2>)} */}
-        {/* {ilmoitukset ? (
-          <>
-            {ilmoitukset.map((ilmoitukset) => {
-              console.log(ilmoitukset);
-              return (
-                <>
-                
-                  <div key={ilmoitukset.id}>
-                  <div className="break-inside flex items-center justify-between bg-white rounded-xl p-4 mb-4">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-10 h-10"
-                  src="https://www.svgrepo.com/show/402760/sun-behind-cloud.svg"
-                />
-                <div className="flex-auto space-y-1">
-                  <h5 className="no-underline font-bold block">
-                    Schedule your day
-                  </h5>
-                  <span className="text-slate-500">November, 22</span>
-                </div>
-              </div>
-              <div className="flex flex-col items-center">
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center rounded-full w-8 h-8 bg-violet-600"
-                >
-                  <svg className="w-5 h-5" viewBox="0 0 15 15" fill="none">
-                    <path
-                      className="fill-white"
-                      d="M4.79062 2.09314C4.63821 1.98427 4.43774 1.96972 4.27121 2.05542C4.10467 2.14112 4 2.31271 4 2.5V12.5C4 12.6873 4.10467 12.8589 4.27121 12.9446C4.43774 13.0303 4.63821 13.0157 4.79062 12.9069L11.7906 7.90687C11.922 7.81301 12 7.66148 12 7.5C12 7.33853 11.922 7.18699 11.7906 7.09314L4.79062 2.09314Z"
-                      fill="black"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-                    <div className="grid grid-cols-6  gap-4 ">
+                      onClick={() => {
+                        router.push({
+                          pathname: "/dhaccounts/ilmoitus-" + ilmoitukset.id,
+                          query: { query: ilmoitukset.cityNames + "-tralalebus-" + ilmoitukset.yritys },
+                        });
+
+
+                        
+                        console.log(ilmoitukset.id);
+                        // this.props.onClick();
+                      }}
+                      key={ilmoitukset.id}
+                    >
+                      <div className="break-inside flex items-center justify-between bg-white rounded-xl p-4 mb-4">
+                        <div className="flex items-center space-x-4">
+                          {jobImage ? (
+                            <>
+                              {" "}
+                              <img className="w-10 h-10" src={imageSource} />
+                            </>
+                          ) : (
+                            <>
+                              <Icon
+                                icon="octicon:briefcase-16"
+                                width="32"
+                                height="32"
+                              />
+                            </>
+                          )}
+                          <div className="flex-auto space-y-1">
+                            <h5 className="no-underline font-bold block">
+                              Työpaikka
+                            </h5>
+                            <span className="text-slate-500">
+                              {" "}
+                              {ilmoitukset.shortTitle} {ilmoitukset.id}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          {/* <button
+                              type="button"
+                              className="bg-gradient-to-tr from-blue-600 text-white shadow-lg-light-blue bg-gray-900 inline-flex items-center justify-center rounded-full w-8 h-8 "
+                            >
+                              <svg
+                                className="w-5 h-5"
+                                viewBox="0 0 15 15"
+                                fill="none"
+                              >
+                                <path
+                                  className="fill-white"
+                                  d="M4.79062 2.09314C4.63821 1.98427 4.43774 1.96972 4.27121 2.05542C4.10467 2.14112 4 2.31271 4 2.5V12.5C4 12.6873 4.10467 12.8589 4.27121 12.9446C4.43774 13.0303 4.63821 13.0157 4.79062 12.9069L11.7906 7.90687C11.922 7.81301 12 7.66148 12 7.5C12 7.33853 11.922 7.18699 11.7906 7.09314L4.79062 2.09314Z"
+                                  fill="black"
+                                />
+                              </svg>
+                            </button> */}
+                        </div>
+                      </div>
+                      {/* <div className="grid grid-cols-6  gap-4 ">
                       <div className="col-start-2  rounded-lg	  bg-gray-300 col-span-4">
                         <a
                           className="cursor-pointer"
@@ -93,28 +141,24 @@ export default function ilmoitukset() {
                         </a>
                       </div>{" "}
                       <br />
+                    </div> */}
                     </div>
-                  </div>
-                </>
-              );
-            })}
-          </>
-        ) : null}
+                  );
+                })}
+              </>
+            ) : null}
 
-        <br /> */}
-
-        <div>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-            rel="stylesheet"
-          />
-          <style
-            dangerouslySetInnerHTML={{
-              __html:
-                '\n    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");\n    body{\n      font-family: "Roboto", sans-serif;\n      background-color: #E2E9EE;\n    }\n    .break-inside {\n      -moz-column-break-inside: avoid;\n      break-inside: avoid;\n    }\n',
-            }}
-          />
-          <div className="box-border mx-4 max-w-full sm:columns-2 md:columns-2 lg:columns-4 xl:columns-5 gap-4">
+            <Link href="/jata-ilmoitus">
+              <a className="break-inside flex items-center justify-center space-x-4 bg-slate-100 rounded-xl overflow-hidden transition-all p-8 mb-4">
+                <svg className="w-8 h-8 text-slate-800" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                  />
+                </svg>
+                <span className="text-slate-800 font-semibold">Uusi</span>
+              </a>
+            </Link>
             {/*             
             
             <div className="break-inside flex items-center justify-between bg-white rounded-xl p-4 mb-4">
@@ -375,101 +419,6 @@ export default function ilmoitukset() {
             </div>{" "}
  */}
 
-            {ilmoitukset ? (
-              <>
-                {ilmoitukset.map((ilmoitukset) => {
-                  console.log(ilmoitukset);
-                  return (
-                    <>
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => {
-                          router.push("/yritys/tyo/" + ilmoitukset.id);
-                          console.log(ilmoitukset.id);
-                          // this.props.onClick();
-                        }}
-                        key={ilmoitukset.id}
-                      >
-                        <div className="break-inside flex items-center justify-between bg-white rounded-xl p-4 mb-4">
-                          <div className="flex items-center space-x-4">
-                            {jobImage ? (
-                              <>
-                                {" "}
-                                <img className="w-10 h-10" src={imageSource} />
-                              </>
-                            ) : (
-                              <>
-                                <Icon
-                                  icon="octicon:briefcase-16"
-                                  width="32"
-                                  height="32"
-                                />
-                              </>
-                            )}
-                            <div className="flex-auto space-y-1">
-                              <h5 className="no-underline font-bold block">
-                                Työpaikka
-                              </h5>
-                              <span className="text-slate-500">
-                                {" "}
-                                {ilmoitukset.shortTitle}{" "} {ilmoitukset.id}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="flex flex-col items-center">
-                            {/* <button
-                              type="button"
-                              className="bg-gradient-to-tr from-blue-600 text-white shadow-lg-light-blue bg-gray-900 inline-flex items-center justify-center rounded-full w-8 h-8 "
-                            >
-                              <svg
-                                className="w-5 h-5"
-                                viewBox="0 0 15 15"
-                                fill="none"
-                              >
-                                <path
-                                  className="fill-white"
-                                  d="M4.79062 2.09314C4.63821 1.98427 4.43774 1.96972 4.27121 2.05542C4.10467 2.14112 4 2.31271 4 2.5V12.5C4 12.6873 4.10467 12.8589 4.27121 12.9446C4.43774 13.0303 4.63821 13.0157 4.79062 12.9069L11.7906 7.90687C11.922 7.81301 12 7.66148 12 7.5C12 7.33853 11.922 7.18699 11.7906 7.09314L4.79062 2.09314Z"
-                                  fill="black"
-                                />
-                              </svg>
-                            </button> */}
-                          </div>
-                        </div>
-                        {/* <div className="grid grid-cols-6  gap-4 ">
-                      <div className="col-start-2  rounded-lg	  bg-gray-300 col-span-4">
-                        <a
-                          className="cursor-pointer"
-                          onClick={() => {
-                            router.push("/yritys/tyo/" + ilmoitukset.id);
-                            console.log(ilmoitukset.id);
-                            // this.props.onClick();
-                          }}
-                        >
-                          {ilmoitukset.id}
-                        </a>
-                      </div>{" "}
-                      <br />
-                    </div> */}
-                      </div>
-                    </>
-                  );
-                })}
-              </>
-            ) : null}
-
-            <a
-              href="#"
-              className="break-inside flex items-center justify-center space-x-4 bg-slate-100 rounded-xl overflow-hidden transition-all p-8 mb-4"
-            >
-              <svg className="w-8 h-8 text-slate-800" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                />
-              </svg>
-              <span className="text-slate-800 font-semibold">Uusi</span>
-            </a>
-
             {/*         
             <div className="break-inside flex items-center justify-between bg-white rounded-xl p-4 mb-4">
               <div className="flex items-center space-x-4">
@@ -667,6 +616,64 @@ export default function ilmoitukset() {
             </div>   */}
           </div>
         </div>
+
+        {/* {ilmoitukset ? (
+          <>
+            {ilmoitukset.map((ilmoitukset) => {
+              console.log(ilmoitukset);
+              return (
+                <>
+                
+                  <div key={ilmoitukset.id}>
+                  <div className="break-inside flex items-center justify-between bg-white rounded-xl p-4 mb-4">
+              <div className="flex items-center space-x-4">
+                <img
+                  className="w-10 h-10"
+                  src="https://www.svgrepo.com/show/402760/sun-behind-cloud.svg"
+                />
+                <div className="flex-auto space-y-1">
+                  <h5 className="no-underline font-bold block">
+                    Schedule your day
+                  </h5>
+                  <span className="text-slate-500">November, 22</span>
+                </div>
+              </div>
+              <div className="flex flex-col items-center">
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center rounded-full w-8 h-8 bg-violet-600"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 15 15" fill="none">
+                    <path
+                      className="fill-white"
+                      d="M4.79062 2.09314C4.63821 1.98427 4.43774 1.96972 4.27121 2.05542C4.10467 2.14112 4 2.31271 4 2.5V12.5C4 12.6873 4.10467 12.8589 4.27121 12.9446C4.43774 13.0303 4.63821 13.0157 4.79062 12.9069L11.7906 7.90687C11.922 7.81301 12 7.66148 12 7.5C12 7.33853 11.922 7.18699 11.7906 7.09314L4.79062 2.09314Z"
+                      fill="black"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+                    <div className="grid grid-cols-6  gap-4 ">
+                      <div className="col-start-2  rounded-lg	  bg-gray-300 col-span-4">
+                        <a
+                          className="cursor-pointer"
+                          onClick={() => {
+                            router.push("/yritys/tyo/" + ilmoitukset.id);
+                            console.log(ilmoitukset.id);
+                            // this.props.onClick();
+                          }}
+                        >
+                          {ilmoitukset.id}
+                        </a>
+                      </div>{" "}
+                      <br />
+                    </div>
+                  </div>
+                </>
+              );
+            })}
+          </>
+        ) : null} */}
       </CardBody>
     </Card>
   );

@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Head from "next/head";
-import { Context } from "../context/state";
-import Julkaistu from "./Ssaa";
-import Stagetwo from "./Stagetwo";
-import Stage from "./Stage";
-import Stagethree from "./Stagethree";
-import { LoginContext } from "../context/loginstate";
+import { Context } from "../../context/state";
+import Julkaistu from "../Ssaa";
+import Stagetwo from "../Stagetwo";
+import Stage from "../Stage";
+import Stagethree from "../Stagethree";
+import { LoginContext } from "../../context/loginstate";
+import HotToastNotification from '../../components/HotToastNotification';
 
-function JataIlmoitus() {
+
+
+export default function JataIlmoitus() {
   const [page, setPage] = useState(1);
   const [stage, setStage] = useState(1);
   const [errorf, setError] = useState({});
@@ -19,9 +22,12 @@ function JataIlmoitus() {
   const { CKEditor, ClassicEditor } = editorRef.current || {};
 
   useEffect(() => {
+    if (!rootLoginState.isAuth === false) {
+      getIlmoitukset();
+    }
+
     editorRef.current = {
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
-      ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
     };
     setEditorLoaded(true);
   }, []);
@@ -29,9 +35,9 @@ function JataIlmoitus() {
   const { rootState, handleSubmitS } = useContext(Context);
   // console.log(rootState);
 
-  const { rootLoginState } = useContext(LoginContext);
+  const { rootLoginState, getIlmoitukset } = useContext(LoginContext);
 
-  console.log(rootLoginState);
+  // console.log(rootLoginState);
 
   const [userInput, setUserInput] = useState({});
   const [kuvaus, setKuvaus] = useState({});
@@ -55,7 +61,7 @@ function JataIlmoitus() {
     console.log(length);
 
     if (event.target.value === "Tallenna") {
-      console.log("all Good Tallennna <-_--__---");
+      console.log("length");
       await handleSubmitS({
         data: data,
         save: 1,
@@ -77,154 +83,6 @@ function JataIlmoitus() {
     let errors = {};
     let formIsValid = true;
 
-    //Name
-    if (!fields["cityNames"]) {
-      formIsValid = false;
-      errors["cityNames"] = "Ei voi olla tyhjä";
-    }
-
-    if (typeof fields["cityNames"] !== "undefined") {
-      if (!fields["cityNames"].match(/^[a-ö A-Ö , .]+$/)) {
-        formIsValid = false;
-        errors["cityNames"] = "Vain kirjaimia";
-      }
-    }
-
-    //HakulomakkeenWWWosoite
-    if (!fields["HakulomakkeenWWWosoite"]) {
-      formIsValid = false;
-      errors["HakulomakkeenWWWosoite"] = "Ei voi olla tyhjä";
-    }
-
-    // if (typeof fields["HakulomakkeenWWWosoite"] !== "undefined") {
-    //   if (!fields["HakulomakkeenWWWosoite"].match(/^[a-ö A-Ö 0-9]+$/)) {
-    //     formIsValid = false;
-    //     errors["HakulomakkeenWWWosoite"] = "Vain kirjaimia";
-    //   }
-    // }
-    //WWWOsoite
-    if (!fields["WWWOsoite"]) {
-      formIsValid = false;
-      errors["WWWOsoite"] = "Ei voi olla tyhjä";
-    }
-
-    //fields.Hakupaattyy
-    if (!fields["Hakupaattyy"]) {
-      formIsValid = false;
-      errors["Hakupaattyy"] = "Ei voi olla tyhjä";
-    }
-
-    // if (typeof fields["Hakupaattyy"] !== "undefined") {
-    //   if (!fields["Hakupaattyy"].match(/^[a-ö A-Ö]+$/)) {
-    //     formIsValid = false;
-    //     errors["Hakupaattyy"] = "Vain kirjaimia";
-    //   }
-    // }
-
-    //fields.Jobtype
-    if (!fields["Jobtype"]) {
-      formIsValid = false;
-      errors["Jobtype"] = "Ei voi olla tyhjä";
-    }
-
-    // if (typeof fields["Jobtype"] !== "undefined") {
-    //   if (!fields["Jobtype"].match(/^[a-ö A-Ö]+$/)) {
-    //     formIsValid = false;
-    //     errors["Jobtype"] = "Vain kirjaimia";
-    //   }
-    // }
-
-    //fields.Maa
-    if (!fields["Maa"]) {
-      formIsValid = false;
-      errors["Maa"] = "Ei voi olla tyhjä";
-    }
-
-    if (typeof fields["Maa"] !== "undefined") {
-      if (!fields["Maa"].match(/^[a-ö A-Ö]+$/)) {
-        formIsValid = false;
-        errors["Maa"] = "Valitse maa";
-      }
-    }
-
-    //fields.postalCode
-    if (!fields["postalCode"]) {
-      formIsValid = false;
-      errors["postalCode"] = "Ei voi olla tyhjä";
-    }
-
-    if (typeof fields["postalCode"] !== "undefined") {
-      if (!fields["postalCode"].match(/^[0-9]+$/)) {
-        formIsValid = false;
-        errors["postalCode"] = "Oikea postinumero";
-      }
-    }
-
-    // //fields.SalaryMax
-    // if (!fields["SalaryMax"]) {
-    //   formIsValid = false;
-    //   errors["SalaryMax"] = "Ei voi olla tyhjä";
-    // }
-
-    // if (typeof fields["SalaryMax"] !== "undefined") {
-    //   if (!fields["SalaryMax"].match(/^[0-9]+$/)) {
-    //     formIsValid = false;
-    //     errors["SalaryMax"] = "max Palkka";
-    //   }
-    // }
-
-    // //fields.SalaryMin
-    // if (!fields["SalaryMin"]) {
-    //   formIsValid = false;
-    //   errors["SalaryMin"] = "Ei voi olla tyhjä";
-    // }
-
-    // if (typeof fields["SalaryMin"] !== "undefined") {
-    //   if (!fields["SalaryMin"].match(/^[a-ö A-Ö]+$/)) {
-    //     formIsValid = false;
-    //     errors["SalaryMin"] = "Vain kirjaimia";
-    //   }
-    // }
-
-    //fields.shortTitle
-    if (!fields["shortTitle"]) {
-      formIsValid = false;
-      errors["shortTitle"] = "Ei voi olla tyhjä";
-    }
-
-    if (typeof fields["shortTitle"] !== "undefined") {
-      if (!fields["shortTitle"].match(/^[a-ö A-Ö]+$/)) {
-        formIsValid = false;
-        errors["shortTitle"] = "Vain kirjaimia";
-      }
-    }
-
-    //fields.Tyopaikanosoite
-    if (!fields["Tyopaikanosoite"]) {
-      formIsValid = false;
-      errors["Tyopaikanosoite"] = "Ei voi olla tyhjä";
-    }
-
-    if (typeof fields["Tyopaikanosoite"] !== "undefined") {
-      if (!fields["Tyopaikanosoite"].match(/^[a-ö A-Ö]+$/)) {
-        formIsValid = false;
-        errors["Tyopaikanosoite"] = "Vain kirjaimia";
-      }
-    }
-
-    //fields.yritys
-    if (!fields["yritys"]) {
-      formIsValid = false;
-      errors["yritys"] = "Ei voi olla tyhjä";
-    }
-
-    if (typeof fields["yritys"] !== "undefined") {
-      if (!fields["yritys"].match(/^[a-ö A-Ö]+$/)) {
-        formIsValid = false;
-        errors["yritys"] = "Vain kirjaimia";
-      }
-    }
-
     if (formIsValid) {
       setPage(2);
       setStage(2);
@@ -232,29 +90,6 @@ function JataIlmoitus() {
       setError(errors);
     }
 
-    // //Email
-    // if (!fields["email"]) {
-    //   formIsValid = false;
-    //   errors["email"] = "Ei voi olla tyhjä";
-    // }
-
-    // if (typeof fields["email"] !== "undefined") {
-    //   let lastAtPos = fields["email"].lastIndexOf("@");
-    //   let lastDotPos = fields["email"].lastIndexOf(".");
-
-    //   if (
-    //     !(
-    //       lastAtPos < lastDotPos &&
-    //       lastAtPos > 0 &&
-    //       fields["email"].indexOf("@@") == -1 &&
-    //       lastDotPos > 2 &&
-    //       fields["email"].length - lastDotPos > 2
-    //     )
-    //   ) {
-    //     formIsValid = false;
-    //     errors["email"] = "Email is not valid";
-    //   }
-    // }
     console.log(state);
 
     // this.setState({ errors: errors });
@@ -279,11 +114,31 @@ function JataIlmoitus() {
   // console.log(state);
 
   function handleChange(evt) {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
+    console.log([evt.target.name]);
+
+    if (evt.target.name === "Jobtype") {
+      const value = evt.target.value;
+      console.log(value);
+      console.log(rootLoginState.ilmoitukset);
+      let x = value;
+
+      let pageData = rootLoginState.ilmoitukset;
+
+      let jarma = pageData.find((x) => x.id == value);
+
+      setState({
+        ...jarma,
+
+        [evt.target.name]: value,
+      });
+      console.log(state);
+    } else {
+      const value = evt.target.value;
+      setState({
+        ...state,
+        [evt.target.name]: value,
+      });
+    }
   }
 
   // console.log(kuvaus);
@@ -292,6 +147,7 @@ function JataIlmoitus() {
   const onChangeHandler = (event) => {
     setInputValue(event.target.value);
   };
+
   return editorLoaded ? (
     <>
       <Head>
@@ -302,6 +158,10 @@ function JataIlmoitus() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {/* <HotToastNotification {...{ handleChange, onChangeHandler }}/> */}
+
+   
 
       {page !== 4 ? <Stage {...{ stage, setPage, page }} /> : <></>}
 
@@ -321,6 +181,49 @@ function JataIlmoitus() {
                       </h2>
                       <div className="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0" />
                     </div>
+                    <br />
+
+                    {rootLoginState.isAuth === false ? null : (
+                      <div className="mb-3 space-y-2 w-full text-xs">
+                        <label className="font-semibold text-gray-600 py-2">
+                          Tallennetut projektit
+                        </label>
+
+                        <select
+                          className="font-bold block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                          required="required"
+                          name="Jobtype"
+                          value={state.Jobtype}
+                          onChange={handleChange}
+                        >
+                          <option className="font-bold" value="Valitse">
+                            Valitse
+                          </option>
+                          {!rootLoginState.ilmoitukset === false ? (
+                            <>
+                              {" "}
+                              {rootLoginState.ilmoitukset.map((item, index) => {
+                                return (
+                                  <option
+                                    key={index}
+                                    value={item.id}
+                                    title="drilla"
+                                  >
+                                    {item.shortTitle}
+                                  </option>
+                                );
+                              })}
+                            </>
+                          ) : null}
+                        </select>
+
+                        {typeof errorf["shortTitle"] !== "undefined" ? (
+                          <p className="text-xs text-red-500 text-right my-3">
+                            {errorf["shortTitle"]}
+                          </p>
+                        ) : null}
+                      </div>
+                    )}
                     <div className="mt-5">
                       <div className="form">
                         <div className="md:flex flex-row md:space-x-4 w-full text-xs">
@@ -779,6 +682,8 @@ function JataIlmoitus() {
                         <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                           {rootLoginState.isAuth === false ? null : (
                             <>
+                                  <HotToastNotification />
+
                               {" "}
                               <button
                                 onClick={handleSubmit}
@@ -786,7 +691,7 @@ function JataIlmoitus() {
                                 value="Tallenna"
                                 className="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100"
                               >
-                                {" "}
+                      
                                 Tallenna
                               </button>
                             </>
@@ -837,4 +742,4 @@ function JataIlmoitus() {
     <div className="md:ml-64 md:mr-64">Sivua Ladataan</div>
   );
 }
-export default JataIlmoitus;
+

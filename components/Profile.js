@@ -1,9 +1,17 @@
 import React from "react";
 
-import Card from "@material-tailwind/react/Card";
-import CardBody from "@material-tailwind/react/CardBody";
-import Button from "@material-tailwind/react/Button";
-import Input from "@material-tailwind/react/Input";
+import Card from "@material-tailwind/react/components/Card";
+import CardBody from "@material-tailwind/react/components/Card/CardBody";
+import CardFooter from "@material-tailwind/react/components/Card/CardFooter";
+// import Image from "@material-tailwind/react/components/Image";
+// import H5 from "@material-tailwind/react/Heading5";
+// import Icon from "@material-tailwind/react/Icon";
+// import LeadText from "@material-tailwind/react/LeadText";
+import Button from "@material-tailwind/react/components/Button";
+// import ProfilePicture from 'assets/img/team-1-800x800.jpg';
+
+import Input from "@material-tailwind/react/components/Input";
+import Textarea from "@material-tailwind/react/components/Textarea";
 
 export default function Profile() {
   return (

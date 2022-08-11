@@ -1,8 +1,23 @@
 import { useState } from "react";
 import Link from "next/link";
+
+
+import Card from "@material-tailwind/react/components/Card";
+import CardBody from "@material-tailwind/react/components/Card/CardBody";
+import CardFooter from "@material-tailwind/react/components/Card/CardFooter";
+// import Image from "@material-tailwind/react/components/Image";
+// import H5 from "@material-tailwind/react/Heading5";
+// import Icon from "@material-tailwind/react/Icon";
+// import LeadText from "@material-tailwind/react/LeadText";
+import Button from "@material-tailwind/react/components/Button";
+// import ProfilePicture from 'assets/img/team-1-800x800.jpg';
+
+import Input from "@material-tailwind/react/components/Input";
+import Textarea from "@material-tailwind/react/components/Textarea";
+
 // import AdminNavbar from "./AdminNavbar";
-import Icon from "@material-tailwind/react/Icon";
-import H6 from "@material-tailwind/react/Heading6";
+// import Icon from "@material-tailwind/react/Icon";
+// import H6 from "@material-tailwind/react/Heading6";
 import { Icon as Icons } from "@iconify/react";
 import { useRouter } from "next/router";
 
@@ -44,7 +59,7 @@ export default function Sidebar() {
                             : "flex  hover:font-bold items-center gap-4 text-sm  py-3"
                         }
                       >
-                        <Icon name="fingerprint" size="2xl" />
+                        {/* <Icon name="fingerprint" size="2xl" /> */}
                         Profiili
                       </a>
                     </Link>
@@ -80,7 +95,7 @@ export default function Sidebar() {
                             : "flex  hover:font-bold items-center gap-4 text-sm  py-3"
                         }
                       >
-                        <Icon name="fingerprint" size="2xl" />
+                        {/* <Icon name="fingerprint" size="2xl" /> */}
                         Omat Imoitukset
                       </a>
                     </Link>
@@ -95,7 +110,7 @@ export default function Sidebar() {
                             : "flex  hover:font-bold items-center gap-4 text-sm  py-3"
                         }
                       >
-                        <Icon name="fingerprint" size="2xl" />
+                        {/* <Icon name="fingerprint" size="2xl" /> */}
                         Tiimit
                       </a>
                     </Link>
@@ -109,7 +124,7 @@ export default function Sidebar() {
                       rel="noreferrer"
                       className="flex items-center gap-4 text-sm font-light py-3"
                     >
-                      <Icon name="description" size="2xl" />
+                      {/* <Icon name="description" size="2xl" /> */}
                       Documentation
                     </a>
                   </li>
@@ -132,7 +147,7 @@ export default function Sidebar() {
           <div
             onClick={() => setShowSidebar(true)}
             style={{ left: "-220px" }}
-            className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-white w-64 z-0 py-4 px-6 transition-all duration-300`}
+            className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-black/75  w-64 z-0 py-4 px-6 transition-all duration-300`}
           >
             <div className="flex-col items-stretch min-h-full flex-nowrap px-0 relative">
               <a className="mt-2 text-center w-full inline-block">
@@ -153,7 +168,7 @@ export default function Sidebar() {
                             : "flex  hover:font-bold items-center gap-4 text-sm  py-3"
                         }
                       >
-                        <Icon name="fingerprint" size="2xl" />
+                        {/* <Icon name="fingerprint" size="2xl" /> */}
                         Profiili
                       </a>
                     </Link>
@@ -189,7 +204,7 @@ export default function Sidebar() {
                             : "flex  hover:font-bold items-center gap-4 text-sm  py-3"
                         }
                       >
-                        <Icon name="fingerprint" size="2xl" />
+                        {/* <Icon name="fingerprint" size="2xl" /> */}
                         Omat Imoitukset
                       </a>
                     </Link>
@@ -204,7 +219,7 @@ export default function Sidebar() {
                             : "flex  hover:font-bold items-center gap-4 text-sm  py-3"
                         }
                       >
-                        <Icon name="fingerprint" size="2xl" />
+                        {/* <Icon name="fingerprint" size="2xl" /> */}
                         Tiimit
                       </a>
                     </Link>

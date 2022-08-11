@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+// import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { LoginContext } from "../context/loginstate";
 import Link from "next/link";
 import LoginLoad from "../components/LoginLoad";
@@ -210,7 +210,7 @@ function Login() {
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
           </div>
 
-          <div className="flex items-center mt-6 -mx-2">
+       <div className="flex items-center mt-6 -mx-2">    {/*
             {rootLoginState.ShowloginButton ? (
               <GoogleLogin
                 clientId={clientId}
@@ -239,9 +239,9 @@ function Login() {
                 cookiePolicy={"single_host_origin"}
                 isSignedIn={true}
               />
-            ) : null}
+            ) : null} */}
 
-            {rootLoginState.ShowlogoutButton ? (
+            {/* {rootLoginState.ShowlogoutButton ? (
               <GoogleLogout
                 clientId={clientId}
                 render={(renderProps) => (
@@ -266,7 +266,7 @@ function Login() {
                 buttonText="Sign Out"
                 onLogoutSuccess={SignoutSuccess}
               ></GoogleLogout>
-            ) : null}
+            ) : null} */}
 
             <a
               href="#"

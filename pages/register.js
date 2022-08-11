@@ -4,7 +4,6 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { LoginContext } from "../context/loginstate";
 
 const clientId =
@@ -165,7 +164,7 @@ export default function Register() {
           </div>
 
           <div className="flex items-center mt-6 -mx-2">
-            {showloginButton ? (
+            {/* {showloginButton ? (
               <GoogleLogin
                 clientId={clientId}
                 buttonText="Sign In"
@@ -220,7 +219,7 @@ export default function Register() {
                 buttonText="Sign Out"
                 onLogoutSuccess={onSignoutSuccess}
               ></GoogleLogout>
-            ) : null}
+            ) : null} */}
 
             <a
               href="#"

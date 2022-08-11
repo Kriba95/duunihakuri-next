@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react";
 import Link from "next/link";
 import { Link as Links } from "react-scroll";
 import { useRouter } from "next/router";
-import { GoogleLogout } from "react-google-login";
+// import { GoogleLogout } from "react-google-login";
 // import { useCookies } from "react-cookie";
 import { LoginContext } from "../context/loginstate";
 import { LoginButton } from "./LoginButton";
@@ -310,7 +310,7 @@ function Navbar({ children, href }) {
                         </>
                       ) : null}
 
-                      {rootLoginState.ShowlogoutButton ? (
+                      {/* {rootLoginState.ShowlogoutButton ? (
                         <GoogleLogout
                           clientId={clientId}
                           render={(renderProps) => (
@@ -378,7 +378,7 @@ function Navbar({ children, href }) {
                             </li>
                           )}
                         </>
-                      )}
+                      )} */}
                     </ul>
                   </nav>
                 </div>

@@ -1,5 +1,6 @@
 import React, { createContext, Component } from "react";
 import axios from "axios";
+import toast, { useToaster } from "react-hot-toast";
 
 export const LoginContext = createContext();
 import { withCookies, Cookies } from "react-cookie";
@@ -363,14 +364,48 @@ class LoginContextProvider extends Component {
       { postData },
       { withCredentials: true }
     ).then((res) => {
-      console.log("getIlmoitukset.res");
+      console.log(res.data);
+
       if (res.data === 0) {
         Router.push("/login");
       }
       if (res.status === 200) {
-        this.setState({
-          ilmoitukset: res.data,
-        });
+        if (res.data[0] === false) {
+          this.setState({
+            ilmoitukset: false,
+          });
+
+        } else {
+          this.setState({
+            ilmoitukset: res.data,
+          });
+        }
+      }
+    });
+  };
+
+  deleteIlmoitus = async (propsID) => {
+    console.log("deleteIlmoitus");
+
+    let postData = {
+      props: propsID,
+    };
+    console.log(postData);
+
+    Axios.post(
+      "/api/deleteIlmoitus.php",
+      { propsID },
+      { withCredentials: true }
+    ).then((res) => {
+      Router.push("/yritys/tyo");
+
+      // if (res.data === 0) {
+
+      // }
+      if (res.status === 200) {
+        toast("Ilmoitus poistettu");
+
+        console.log(res);
       }
     });
   };
@@ -392,6 +427,7 @@ class LoginContextProvider extends Component {
       loginUser: this.loginUser,
       isLoggedIn: this.isLoggedIn,
       getIlmoitukset: this.getIlmoitukset,
+      deleteIlmoitus: this.deleteIlmoitus,
     };
     return (
       <LoginContext.Provider value={contextValue}>

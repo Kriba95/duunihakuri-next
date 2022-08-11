@@ -1,11 +1,11 @@
 import React from "react";
 
-import Card from "@material-tailwind/react/Card";
-import CardBody from "@material-tailwind/react/CardBody";
-import Button from "@material-tailwind/react/Button";
-import Input from "@material-tailwind/react/Input";
+import Card from "@material-tailwind/react/components/Card";
+import CardBody from "@material-tailwind/react/components/Card/CardBody";
+import Button from "@material-tailwind/react/components/Button";
+import Input from "@material-tailwind/react/components/Input";
 
-export default MyProfile = () => (
+export default function MyProfile () {
 
   <Card>
     <div className="bg-gradient-to-tr from-blue-600   -mt-10 mb-4 rounded-xl text-white grid items-center w-full h-24 py-4 px-8  shadow-lg-light-blue bg-gray-900">
@@ -79,4 +79,4 @@ export default MyProfile = () => (
       </form>
     </CardBody>
   </Card>
-);
+}

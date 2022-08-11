@@ -1,9 +1,9 @@
 import React from "react";
 
-import Card from "@material-tailwind/react/Card";
-import CardBody from "@material-tailwind/react/CardBody";
-import Button from "@material-tailwind/react/Button";
-import Input from "@material-tailwind/react/Input";
+import Card from "@material-tailwind/react/components/Card";
+import CardBody from "@material-tailwind/react/components/Card/CardBody";
+import Button from "@material-tailwind/react/components/Button";
+import Input from "@material-tailwind/react/components/Input";
 
 export default function HelpCard() {
   return (
